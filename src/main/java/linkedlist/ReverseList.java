@@ -32,4 +32,29 @@ public class ReverseList {
         // 最后返回pre
         return pre;
     }
+
+    /**
+     * 终止条件：当 cur 为空，则返回尾节点 pre （即反转链表的头节点）；
+     * 递归后继节点，记录返回值（即反转链表的头节点）为 res ；
+     * 修改当前节点 cur 引用指向前驱节点 pre ；
+     * 返回反转链表的头节点 res ；
+     * @param head
+     * @return
+     */
+    public Node reverse1(Node head) {
+        return recur(head, null);    // 调用递归并返回
+    }
+
+    private Node recur(Node cur, Node pre) {
+        if (cur == null) {
+            return pre; // 终止条件
+        }
+        // 递归后继节点
+        Node res = recur(cur.next, cur);
+        // 修改节点引用指向
+        cur.next = pre;
+        // 返回反转链表的头节点
+        return res;
+    }
+
 }
