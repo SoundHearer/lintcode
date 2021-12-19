@@ -6,12 +6,12 @@ package linkedlist;
  */
 public class RemoveLastKthNode {
 
-    public Node removeLastKthNode(Node head, int lastKth) {
+    public ListNode removeLastKthNode(ListNode head, int lastKth) {
         if (head == null || lastKth < 1) {
             return head;
         }
 
-        Node cur = head;
+        ListNode cur = head;
         while (cur != null) {
             lastKth--;
             cur = cur.next;

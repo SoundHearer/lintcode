@@ -5,12 +5,12 @@ package linkedlist;
  */
 public class RemoveByRatio {
 
-    public Node removeByRatio(Node head, int a, int b) {
+    public ListNode removeByRatio(ListNode head, int a, int b) {
         if (a < 1 || a > b) {
             return head;
         }
         int n = 0;
-        Node cur = head;
+        ListNode cur = head;
         while (cur != null) {
             n++;
             cur = cur.next;

@@ -12,37 +12,37 @@ public class ReversePart {
      * @param to
      * @return
      */
-    public static Node reversePart(Node head, int from, int to) {
+    public static ListNode reversePart(ListNode head, int from, int to) {
         // 首先处理边界情况，如果不满足1<=from<=to<=N，直接返回head
         int len = 0;
-        Node node1 = head;
-        Node fPre = null;
-        Node tPos = null;
-        while (node1 != null) {
+        ListNode listNode1 = head;
+        ListNode fPre = null;
+        ListNode tPos = null;
+        while (listNode1 != null) {
             len++;
-            fPre = len == from - 1 ? node1 : fPre;
-            tPos = len == to + 1 ? node1: tPos;
-            node1 = node1.next;
+            fPre = len == from - 1 ? listNode1 : fPre;
+            tPos = len == to + 1 ? listNode1 : tPos;
+            listNode1 = listNode1.next;
         }
         if (from > to || from < 1 || to > len) {
             return head;
         }
         // 找到from-1的结点fPre 和 to+1的结点tPos，把需要翻转的部分先翻转，然后正确地连接fPre和tPos
-        node1 = fPre == null ? head : fPre.next;
-        Node node2 = node1.next;
-        node1.next = tPos;
-        Node next = null;
-        while (node2 != tPos) {
-            next = node2.next;
-            node2.next = node1;
-            node1 = node2;
-            node2 = next;
+        listNode1 = fPre == null ? head : fPre.next;
+        ListNode listNode2 = listNode1.next;
+        listNode1.next = tPos;
+        ListNode next = null;
+        while (listNode2 != tPos) {
+            next = listNode2.next;
+            listNode2.next = listNode1;
+            listNode1 = listNode2;
+            listNode2 = next;
         }
         if (fPre != null) {
-            fPre.next = node1;
+            fPre.next = listNode1;
             return head;
         }
-        return node1;
+        return listNode1;
     }
 
     /**
@@ -52,12 +52,12 @@ public class ReversePart {
      * @param right
      * @return
      */
-    public static Node reverseBetween(Node head, int left, int right) {
+    public static ListNode reverseBetween(ListNode head, int left, int right) {
         // 因为头节点有可能发生变化，使用虚拟头节点可以避免复杂的分类讨论
-        Node dummyNode = new Node(-1);
-        dummyNode.next = head;
+        ListNode dummyListNode = new ListNode(-1);
+        dummyListNode.next = head;
 
-        Node pre = dummyNode;
+        ListNode pre = dummyListNode;
         // 第一步：从虚拟头结点走left - 1步，来到left结点的前一个结点
         // 建议写在for循环里，语义清晰
         for (int i = 0; i < left - 1; i++) {
@@ -65,35 +65,35 @@ public class ReversePart {
         }
 
         // 第二步：从pre再走right - left + 1步，来到right结点
-        Node rightNode = pre;
+        ListNode rightListNode = pre;
         for (int i = 0; i < right - left + 1; i++) {
-            rightNode = rightNode.next;
+            rightListNode = rightListNode.next;
         }
 
         // 第三部：切断出一个字链表（截取链表）
-        Node leftNode = pre.next;
-        Node cur = rightNode.next;
+        ListNode leftListNode = pre.next;
+        ListNode cur = rightListNode.next;
 
         // 注意：切断链接
         pre.next = null;
-        rightNode.next = null;
+        rightListNode.next = null;
 
         // 第四步：反转链表子区间
-        reverseList(leftNode);
+        reverseList(leftListNode);
 
         // 第五步：接回到原来的链表中
-        pre.next = rightNode;
-        leftNode.next = cur;
-        return dummyNode.next;
+        pre.next = rightListNode;
+        leftListNode.next = cur;
+        return dummyListNode.next;
     }
 
-    public static void reverseList(Node head) {
+    public static void reverseList(ListNode head) {
         // 也可以使用递归反转一个链表
-        Node pre = null;
-        Node cur = head;
+        ListNode pre = null;
+        ListNode cur = head;
 
         while (cur != null) {
-            Node next = cur.next;
+            ListNode next = cur.next;
             cur.next = pre;
             pre = cur;
             cur = next;
@@ -111,18 +111,18 @@ public class ReversePart {
      * @param right
      * @return
      */
-    public static Node reverseBetween1(Node head, int left, int right) {
+    public static ListNode reverseBetween1(ListNode head, int left, int right) {
         // 创建虚拟结点
-        Node dummyNode = new Node(-1);
-        dummyNode.next = head;
+        ListNode dummyListNode = new ListNode(-1);
+        dummyListNode.next = head;
         // 定义结点pre, cur和next
-        Node pre = dummyNode;
+        ListNode pre = dummyListNode;
         // 需要让pre走到待反转部分的前一个结点，即left - 1的位置
         for (int i = 0; i < left - 1; i++) {
             pre = pre.next;
         }
-        Node cur = pre.next;
-        Node next;
+        ListNode cur = pre.next;
+        ListNode next;
 
         for (int i = 0; i < right - left; i++) {
             // 先将 cur 的下一个节点记录为 next
@@ -133,19 +133,19 @@ public class ReversePart {
             next.next = pre.next;
             pre.next = next;
         }
-        return dummyNode.next;
+        return dummyListNode.next;
     }
 
     public static void main(String[] args) {
-        Node head = new Node(2);
-        head.next = new Node(3);
-        head.next.next = new Node(4);
-        head.next.next.next = new Node(5);
-        head.next.next.next.next = new Node(6);
-        Node node = reverseBetween1(head, 2, 4);
-        while (node != null) {
-            System.out.print(node.value + " ");
-            node = node.next;
+        ListNode head = new ListNode(2);
+        head.next = new ListNode(3);
+        head.next.next = new ListNode(4);
+        head.next.next.next = new ListNode(5);
+        head.next.next.next.next = new ListNode(6);
+        ListNode listNode = reverseBetween1(head, 2, 4);
+        while (listNode != null) {
+            System.out.print(listNode.value + " ");
+            listNode = listNode.next;
         }
 
     }

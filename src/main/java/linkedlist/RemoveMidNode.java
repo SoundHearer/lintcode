@@ -2,7 +2,7 @@ package linkedlist;
 
 public class RemoveMidNode {
     
-    public Node removeMidNode(Node head) {
+    public ListNode removeMidNode(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
@@ -11,8 +11,8 @@ public class RemoveMidNode {
             return head.next;
         }
 
-        Node pre = head;
-        Node cur = head.next.next;
+        ListNode pre = head;
+        ListNode cur = head.next.next;
         while (cur.next != null && cur.next.next != null) {
             pre = pre.next;
             cur = cur.next;

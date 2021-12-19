@@ -17,13 +17,13 @@ package linkedlist;
  */
 public class ReverseList {
 
-    public Node reverse(Node head) {
-        Node pre = null;
-        Node cur = head;
+    public ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
 
         while (cur != null) {
             // 保留cur的后继结点
-            Node temp = cur.next;
+            ListNode temp = cur.next;
             // cur指向其前驱结点
             cur.next = pre;
             pre = cur;
@@ -41,16 +41,16 @@ public class ReverseList {
      * @param head
      * @return
      */
-    public Node reverse1(Node head) {
+    public ListNode reverse1(ListNode head) {
         return recur(head, null);    // 调用递归并返回
     }
 
-    private Node recur(Node cur, Node pre) {
+    private ListNode recur(ListNode cur, ListNode pre) {
         if (cur == null) {
             return pre; // 终止条件
         }
         // 递归后继节点
-        Node res = recur(cur.next, cur);
+        ListNode res = recur(cur.next, cur);
         // 修改节点引用指向
         cur.next = pre;
         // 返回反转链表的头节点

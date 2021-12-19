@@ -1,7 +1,7 @@
 package linkedlist;
 
 public class PrintCommonPart {
-    public static void printCommonPart(Node head1, Node head2) {
+    public static void printCommonPart(ListNode head1, ListNode head2) {
         while (head1 != null && head2 != null) {
             if (head1.value < head2.value) {
                 head1 = head1.next;
@@ -17,17 +17,17 @@ public class PrintCommonPart {
     }
 
     public static void main(String[] args) {
-        Node head1 = new Node(2);
-        head1.next = new Node(5);
-        head1.next.next = new Node(7);
-        head1.next.next.next = new Node(9);
-        head1.next.next.next.next = new Node(90);
+        ListNode head1 = new ListNode(2);
+        head1.next = new ListNode(5);
+        head1.next.next = new ListNode(7);
+        head1.next.next.next = new ListNode(9);
+        head1.next.next.next.next = new ListNode(90);
 
-        Node head2 = new Node(1);
-        head2.next = new Node(5);
-        head2.next.next = new Node(7);
-        head2.next.next.next = new Node(9);
-        head2.next.next.next.next = new Node(89);
+        ListNode head2 = new ListNode(1);
+        head2.next = new ListNode(5);
+        head2.next.next = new ListNode(7);
+        head2.next.next.next = new ListNode(9);
+        head2.next.next.next.next = new ListNode(89);
 
         printCommonPart(head1, head2);
 
