@@ -3,6 +3,9 @@ package linkedlist;
 public class ListNode {
     public int value;
     public ListNode next;
+    public ListNode() {
+
+    }
     public ListNode(int data) {
         this.value = data;
     }
