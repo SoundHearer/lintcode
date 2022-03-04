@@ -44,7 +44,7 @@ public class NotifyTest {
             public void run() {
                 synchronized (resourceA) {
                    System.out.println("threadC begin notify");
-                   resourceA.notify();
+                   resourceA.notifyAll();
                 }
             }
         });
@@ -52,6 +52,9 @@ public class NotifyTest {
         // 启动线程
         threadA.start();
         threadB.start();
+        // 这里启动线程C前首先调用sleep方法让主线程休眠1s，
+        // 这样做的目的是让线程A和线程B全部执行到调用wait方法后再调用线程C的notify方法
+        Thread.sleep(1000);
         threadC.start();
         // 等待线程结束
         threadA.join();

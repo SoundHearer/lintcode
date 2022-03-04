@@ -16,6 +16,8 @@ public class DeadLockTest2 {
                 synchronized (resourceA) {
                     System.out.println(Thread.currentThread() + " get ResourceA");
                     try {
+                        // 休眠1s是为了保证线程A在获取resourceB对应的锁前让线程B抢占到CPU，
+                        // 获取到资源resourceB上的锁
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
