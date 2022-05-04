@@ -7,12 +7,15 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 public class NonReentrantLock implements Lock, Serializable {
+    // 内部帮助类
     private static class Sync extends AbstractQueuedSynchronizer {
+        // 是否锁已经被持有
         @Override
         protected boolean isHeldExclusively() {
             return getState() == 1;
         }
 
+        // 如果state为0则尝试获取锁
         @Override
         protected boolean tryAcquire(int acquires) {
             assert acquires == 1;
@@ -23,6 +26,7 @@ public class NonReentrantLock implements Lock, Serializable {
             return false;
         }
 
+        // 尝试释放锁，设置state为0
         @Override
         protected boolean tryRelease(int releases) {
             assert releases == 1;
@@ -34,12 +38,13 @@ public class NonReentrantLock implements Lock, Serializable {
             return true;
         }
 
-
+        // 提供条件变量接口
         Condition newCondition() {
             return new ConditionObject();
         }
     }
 
+    // 创建一个Sync来做具体的工作
     private final Sync sync = new Sync();
 
     @Override
@@ -68,11 +73,11 @@ public class NonReentrantLock implements Lock, Serializable {
 
     @Override
     public void lockInterruptibly() throws InterruptedException {
-
+        sync.acquireInterruptibly(1);
     }
 
     @Override
     public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
-        return false;
+        return sync.tryAcquireNanos(1, unit.toNanos(time));
     }
 }

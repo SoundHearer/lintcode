@@ -31,29 +31,10 @@ public class DeadLockTest2 {
         });
 
         // 创建线程B
-//        Thread threadB = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                synchronized (resourceB) {
-//                    System.out.println(Thread.currentThread() + " get ResourceB");
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    System.out.println(Thread.currentThread() + "waiting get sourceA");
-//                    synchronized (resourceA) {
-//                        System.out.println(Thread.currentThread() + "get resourceA");
-//                    }
-//                }
-//            }
-//        });
-
-        // 创建线程B
         Thread threadB = new Thread(new Runnable() {
             @Override
             public void run() {
-                synchronized (resourceA) {
+                synchronized (resourceB) {
                     System.out.println(Thread.currentThread() + " get ResourceB");
                     try {
                         Thread.sleep(1000);
@@ -61,12 +42,31 @@ public class DeadLockTest2 {
                         e.printStackTrace();
                     }
                     System.out.println(Thread.currentThread() + "waiting get sourceA");
-                    synchronized (resourceB) {
+                    synchronized (resourceA) {
                         System.out.println(Thread.currentThread() + "get resourceA");
                     }
                 }
             }
         });
+
+//        // 创建线程B
+//        Thread threadB = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                synchronized (resourceA) {
+//                    System.out.println(Thread.currentThread() + " get ResourceB");
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    System.out.println(Thread.currentThread() + "waiting get sourceA");
+//                    synchronized (resourceB) {
+//                        System.out.println(Thread.currentThread() + "get resourceA");
+//                    }
+//                }
+//            }
+//        });
 
         // 启动线程
         threadA.start();

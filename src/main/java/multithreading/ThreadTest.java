@@ -3,8 +3,6 @@ package multithreading;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 
 public class ThreadTest {
 
@@ -44,7 +42,7 @@ public class ThreadTest {
 //        RunnableTask task = new RunnableTask();
 //        new Thread(task).start();
 //        new Thread(task).start();
-//        // 创建异步任务
+        // 创建异步任务
 //        FutureTask<String> futureTask = new FutureTask<>(new CallerTask());
 //        // 启动线程
 //        new Thread(futureTask).start();
