@@ -6,7 +6,7 @@ package javaexpert.designpattern.factory;
  */
 public class Client {
      public static void main(String[] args) {
-         
+         SimpleFactory.makeProduct(1).doSomething();
      }
      
      // 抽象产品
@@ -57,5 +57,7 @@ public class Client {
              return null;
          }
     }
+    
+    
 
 }
